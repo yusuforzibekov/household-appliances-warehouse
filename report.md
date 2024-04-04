@@ -13,8 +13,8 @@
     <tr>
       <td>1</td>
       <td>Task Clarification</td>
-      <td>27.02.2024<td>
-      <td>29.03.2024<td>
+      <td>27.02.2024</td>
+      <td>29.03.2024</td>
       <td>
         <ol>
           <li>Received and analyzed the task</li>
