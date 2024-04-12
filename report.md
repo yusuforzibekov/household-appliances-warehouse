@@ -1,6 +1,6 @@
 # Report
 
-##  Name: Households appliances 
+##  Name: Household Appliances Warehouse
 
 ### Author: Orzibekov Yusufbek
 
