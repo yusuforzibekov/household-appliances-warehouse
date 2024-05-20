@@ -1,78 +1,11 @@
-# Report
+## Guide for the Course Project Implementation
 
-##  Name: Household Appliances Warehouse
-
-### Author: Orzibekov Yusufbek
-
-<table>
-<caption>Progress Report</caption>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Stage</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Task Clarification</td>
-      <td>27.02.2024</td>
-      <td>29.03.2024</td>
-      <td>
-        <ol>
-          <li>Received and analyzed the task</li>
-          <li>Clarified details and requirements with the mentor</li>
-          <li>Proposed a 10-week work plan for course project development</li>
-          <li>Created a progress report and placed it in your repository</li>
-        </ol>
-      </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Analysis</td>
-      <td>in progress</td>
-      <td>in progress</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Use cases</td>
-      <td>in progress</td>
-      <td>in progress</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Search for Solutions</td>
-      <td>in progress</td>
-      <td>in progress</td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Software Development</td>
-      <td>in progress</td>
-      <td>in progress</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Development Completion</td>
-      <td>in progress</td>
-      <td>in progress</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Presentation</td>
-      <td>in progress</td>
-      <td>in progress</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
+| Stage                    | Start Date | End Date   | Demonstration                                                                                                                                                                                                                            |
+|--------------------------|------------|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Task Clarification       | 26.02.2024 | 01.03.2024 | - Analyze the task, clarify details with mentor.<br>- Propose 10-week work plan for project development.<br>- Create a progress report in your repository.                                            |
+| Analysis                 | 01.03.2024 | 04.03.2024 | - Study the applied area.<br>- Define basic functionality for MVP.<br>- Describe additional and advanced functionalities.                                                                            |
+| Use Cases                | 04.03.2024 | 08.03.2024 | - Describe multiple use options for the program from the user's perspective.                                                                                                                          |
+| Search for Solutions     | 08.03.2024 | 15.03.2024 | - Choose and explore layered architecture.<br>- Analyze examples and materials using provided sources.                                                                                               |
+| Software Development     | 15.03.2024 | 26.04.2024 | - Create a program with minimal functionality.<br>- Check functionality, correct errors, and improve prototype.<br>- Gradually complete progress report.                                              |
+| Development Completion   | 26.04.2024 | 03.05.2024 | - Verify use cases, note inconsistencies and reasons.<br>- Estimate progress in implementing functionalities and note any discrepancies.<br>- Record a demonstration video of your application.        |
+| Presentation             | 03.05.2024 | 04.05.2024 | - Demonstrate an application to the mentor<br>- Show its advantages and disadvantages<br>- Provide recommendations and answer questions about functionality and implementation.                                                               |

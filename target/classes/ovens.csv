@@ -1,4 +1,4 @@
-Power-Consumption; Weight; Capacity; Depth; Height; Width; Price
-1500;10;32;60;45.5;59.5;12000
-1500;12;33;60;45;68;14500
-2000;11;33;60;40; 70; 18000
+ID;Power-Consumption;Capacity;Weight;Width;Height;Depth;Price
+1;1500;32;10;59.5;45.5;60;12000
+2;1500;33;12;68;45;60;14500
+3;2000;33;11;70;40;60;18000
