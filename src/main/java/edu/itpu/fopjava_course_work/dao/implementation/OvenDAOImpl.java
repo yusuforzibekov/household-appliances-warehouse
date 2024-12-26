@@ -25,22 +25,27 @@ public class OvenDAOImpl implements OvenDAO {
         // Initialize an empty list to hold `Oven` objects
         List<Oven> ovenList = new ArrayList<>();
 
-        // Iterate through each row from the CSV file
-        for (String[] ovenData : rows) {
-            // Parse the data from each row and create an `Oven` object
-            Oven oven = new Oven(
-                Integer.parseInt(ovenData[0]), // ID
-                Integer.parseInt(ovenData[1]), // Power consumption
-                Integer.parseInt(ovenData[2]), // Capacity
-                Integer.parseInt(ovenData[3]), // Weight
-                Double.parseDouble(ovenData[4]), // Width
-                Double.parseDouble(ovenData[5]), // Height
-                Integer.parseInt(ovenData[6]), // Depth
-                Integer.parseInt(ovenData[7]) // Price
-            );
+        // Iterate through each row from the CSV file, skipping the header row
+        for (int i = 1; i < rows.size(); i++) {
+            String[] ovenData = rows.get(i);
+            try {
+                // Parse the data from each row and create an `Oven` object
+                Oven oven = new Oven(
+                    Integer.parseInt(ovenData[0]), // ID
+                    Integer.parseInt(ovenData[1]), // Power consumption
+                    Integer.parseInt(ovenData[2]), // Capacity
+                    Integer.parseInt(ovenData[3]), // Weight
+                    Double.parseDouble(ovenData[4]), // Width
+                    Double.parseDouble(ovenData[5]), // Height
+                    Integer.parseInt(ovenData[6]), // Depth
+                    Integer.parseInt(ovenData[7]) // Price
+                );
 
-            // Add the `Oven` object to the list
-            ovenList.add(oven);
+                // Add the `Oven` object to the list
+                ovenList.add(oven);
+            } catch (NumberFormatException e) {
+                // Skip rows with invalid data without printing
+            }
         }
 
         // Return the list of `Oven` objects
