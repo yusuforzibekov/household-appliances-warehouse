@@ -13,6 +13,7 @@ public class BaseController {
     private static RefrigeratorController refrigeratorOperations;
     private static FeedbackController feedbackController;
     private static HelpController helpController;
+    private static AdminController adminController;
 
     public BaseController() {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -22,6 +23,7 @@ public class BaseController {
         refrigeratorOperations = new RefrigeratorController(serviceFactory.getRefrigeratorService());
         feedbackController = new FeedbackController();
         helpController = new HelpController();
+        adminController = new AdminController();
     }
 
     public void start() throws IOException {
@@ -43,7 +45,8 @@ public class BaseController {
             System.out.println("3. Refrigerators");
             System.out.println("4. Help");
             System.out.println("5. Provide Feedback");
-            System.out.println("6. Exit");
+            System.out.println("6. Admin Panel");
+            System.out.println("7. Exit");
             System.out.println(Colors.BOLD + Colors.BLUE + "=================" + Colors.RESET);
 
             System.out.print("Please enter your choice: ");
@@ -56,7 +59,8 @@ public class BaseController {
                 case 3 -> refrigeratorOperations.handleRefrigerators(scanner);
                 case 4 -> helpController.handleHelp(scanner);
                 case 5 -> feedbackController.handleFeedback(scanner);
-                case 6 -> {
+                case 6 -> adminController.start();
+                case 7 -> {
                     System.out.println(Colors.YELLOW + "Exiting the program. Goodbye!" + Colors.RESET);
                     scanner.close();
                     System.exit(0);

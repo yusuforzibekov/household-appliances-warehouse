@@ -9,4 +9,8 @@ public interface LaptopDAO {
     List<String[]> readMethod() throws IOException;
 
     List<Laptop> getLaptopList() throws IOException;
+
+    void createLaptop(Laptop laptop) throws IOException;
+
+    void deleteLaptop(int id) throws IOException;
 }
