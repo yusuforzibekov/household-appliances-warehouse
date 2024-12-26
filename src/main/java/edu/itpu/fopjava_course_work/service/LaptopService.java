@@ -13,4 +13,8 @@ public interface LaptopService {
     List<Laptop> getLaptopsByCPU(String searchLaptopByCPU) throws IOException;
 
     List<Laptop> getAll() throws IOException;
+
+    void addLaptop(Laptop laptop) throws IOException;
+
+    boolean removeLaptop(int id) throws IOException;
 }

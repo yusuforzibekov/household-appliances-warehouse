@@ -1,22 +1,16 @@
 package edu.itpu.fopjava_course_work.service;
 
-import edu.itpu.fopjava_course_work.dao.DAOFactory;
 import edu.itpu.fopjava_course_work.service.implementation.LaptopServiceImpl;
 import edu.itpu.fopjava_course_work.service.implementation.OvenServiceImpl;
 import edu.itpu.fopjava_course_work.service.implementation.RefrigeratorServiceImpl;
 
 public final class ServiceFactory {
     private static final ServiceFactory instance = new ServiceFactory();
-    private final LaptopService laptopService;
-    private final OvenService ovenService;
-    private final RefrigeratorService refrigeratorService;
+    private final LaptopService laptopService = new LaptopServiceImpl();
+    private final OvenService ovenService = new OvenServiceImpl();
+    private final RefrigeratorService refrigeratorService = new RefrigeratorServiceImpl();
 
-    private ServiceFactory() {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        laptopService = new LaptopServiceImpl(daoFactory.getLaptopDAO());
-        ovenService = new OvenServiceImpl(daoFactory.getOvenDAO());
-        refrigeratorService = new RefrigeratorServiceImpl(daoFactory.getRefrigeratorDAO());
-    }
+    private ServiceFactory() {}
 
     public static ServiceFactory getInstance() {
         return instance;

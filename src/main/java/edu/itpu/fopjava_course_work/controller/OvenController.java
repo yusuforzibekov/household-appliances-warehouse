@@ -75,4 +75,81 @@ public class OvenController {
             }
         }
     }
+
+    public void handleAdminOperations(Scanner scanner) throws IOException {
+        while (true) {
+            System.out.println("\n" + Colors.BOLD + Colors.BLUE + "=== OVEN ADMIN OPERATIONS ===" + Colors.RESET);
+            System.out.println("1. Add Oven");
+            System.out.println("2. Remove Oven");
+            System.out.println("3. View Ovens");
+            System.out.println("4. Back to Admin Menu");
+            System.out.println(Colors.BOLD + Colors.BLUE + "==============================" + Colors.RESET);
+
+            System.out.print("Please enter your choice: ");
+            int choice = UserInputHandler.readInteger(scanner);
+
+            switch (choice) {
+                case 1 -> addOven(scanner);
+                case 2 -> removeOven(scanner);
+                case 3 -> viewOvens();
+                case 4 -> {
+                    return;
+                }
+                default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
+            }
+        }
+    }
+
+    private void addOven(Scanner scanner) {
+        System.out.print("Enter the power consumption of the oven: ");
+        String powerConsumption = scanner.next();
+        System.out.print("Enter the capacity of the oven: ");
+        String capacity = scanner.next();
+        System.out.print("Enter the weight of the oven: ");
+        String weight = scanner.next();
+        System.out.print("Enter the width of the oven: ");
+        String width = scanner.next();
+        System.out.print("Enter the height of the oven: ");
+        String height = scanner.next();
+        System.out.print("Enter the depth of the oven: ");
+        String depth = scanner.next();
+        System.out.print("Enter the price of the oven: ");
+        String price = scanner.next();
+        
+        Oven oven = new Oven(0, Integer.parseInt(powerConsumption), Integer.parseInt(capacity), Integer.parseInt(weight), Double.parseDouble(width), Double.parseDouble(height), Integer.parseInt(depth), Integer.parseInt(price));
+        try {
+            ovenService.addOven(oven);
+            System.out.println(Colors.GREEN + "Oven added successfully!" + Colors.RESET);
+        } catch (IOException e) {
+            System.out.println(Colors.RED + "Error adding oven: " + e.getMessage() + Colors.RESET);
+        }
+    }
+
+    private void removeOven(Scanner scanner) {
+        System.out.print("Enter the ID of the oven to remove: ");
+        int id = scanner.nextInt();
+        try {
+            boolean removed = ovenService.removeOven(id);
+            if (removed) {
+                System.out.println(Colors.GREEN + "Oven removed successfully!" + Colors.RESET);
+            } else {
+                System.out.println(Colors.RED + "Oven not found." + Colors.RESET);
+            }
+        } catch (IOException e) {
+            System.out.println(Colors.RED + "Error removing oven: " + e.getMessage() + Colors.RESET);
+        }
+    }
+
+    private void viewOvens() {
+        try {
+            List<Oven> ovenList = ovenService.getAll();
+            if (ovenList.isEmpty()) {
+                System.out.println(Colors.RED + "No ovens available." + Colors.RESET);
+            } else {
+                ovenList.forEach(oven -> System.out.println(Colors.CYAN + oven + Colors.RESET));
+            }
+        } catch (IOException e) {
+            System.out.println(Colors.RED + "Error viewing ovens: " + e.getMessage() + Colors.RESET);
+        }
+    }
 }

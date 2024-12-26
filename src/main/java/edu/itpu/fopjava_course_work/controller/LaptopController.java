@@ -78,4 +78,89 @@ public class LaptopController {
             }
         }
     }
+
+    public void handleAdminOperations(Scanner scanner) throws IOException {
+        while (true) {
+            System.out.println("\n" + Colors.BOLD + Colors.BLUE + "=== LAPTOP ADMIN OPERATIONS ===" + Colors.RESET);
+            System.out.println("1. Add Laptop");
+            System.out.println("2. Remove Laptop");
+            System.out.println("3. View Laptops");
+            System.out.println("4. Back to Admin Menu");
+            System.out.println(Colors.BOLD + Colors.BLUE + "===============================" + Colors.RESET);
+
+            System.out.print("Please enter your choice: ");
+            int choice = UserInputHandler.readInteger(scanner);
+
+            switch (choice) {
+                case 1 -> addLaptop(scanner);
+                case 2 -> removeLaptop(scanner);
+                case 3 -> viewLaptops();
+                case 4 -> {
+                    return;
+                }
+                default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
+            }
+        }
+    }
+
+    private void addLaptop(Scanner scanner) {
+        System.out.print("Enter the battery capacity of the laptop: ");
+        String batteryCapacity = scanner.next();
+        System.out.print("Enter the OS of the laptop: ");
+        String os = scanner.next();
+        System.out.print("Enter the memory ROM of the laptop: ");
+        String memoryRom = scanner.next();
+        System.out.print("Enter the system memory of the laptop: ");
+        String systemMemory = scanner.next();
+        System.out.print("Enter the CPU of the laptop: ");
+        String cpu = scanner.next();
+        System.out.print("Enter the display inches of the laptop: ");
+        String displayInches = scanner.next();
+        System.out.print("Enter the weight of the laptop: ");
+        String weight = scanner.next();
+        System.out.print("Enter the width of the laptop: ");
+        String width = scanner.next();
+        System.out.print("Enter the height of the laptop: ");
+        String height = scanner.next();
+        System.out.print("Enter the depth of the laptop: ");
+        String depth = scanner.next();
+        System.out.print("Enter the price of the laptop: ");
+        String price = scanner.next();
+        
+        Laptop laptop = new Laptop(0, Double.parseDouble(batteryCapacity), os, Integer.parseInt(memoryRom), Integer.parseInt(systemMemory), Double.parseDouble(cpu), Integer.parseInt(displayInches), Integer.parseInt(weight), Double.parseDouble(width), Double.parseDouble(height), Integer.parseInt(depth), Integer.parseInt(price));
+        try {
+            laptopService.addLaptop(laptop);
+            System.out.println(Colors.GREEN + "Laptop added successfully!" + Colors.RESET);
+        } catch (IOException e) {
+            System.out.println(Colors.RED + "Error adding laptop: " + e.getMessage() + Colors.RESET);
+        }
+    }
+
+    private void removeLaptop(Scanner scanner) {
+        System.out.print("Enter the ID of the laptop to remove: ");
+        int id = scanner.nextInt();
+        try {
+            boolean removed = laptopService.removeLaptop(id);
+            if (removed) {
+                System.out.println(Colors.GREEN + "Laptop removed successfully!" + Colors.RESET);
+            } else {
+                System.out.println(Colors.RED + "Laptop not found." + Colors.RESET);
+            }
+        } catch (IOException e) {
+            System.out.println(Colors.RED + "Error removing laptop: " + e.getMessage() + Colors.RESET);
+        }
+    }
+
+    private void viewLaptops() {
+        try {
+            List<Laptop> laptopList = laptopService.getAll();
+            if (laptopList.isEmpty()) {
+                System.out.println(Colors.RED + "No laptops available." + Colors.RESET);
+            } else {
+                laptopList.forEach(laptop -> System.out.println(Colors.CYAN + laptop + Colors.RESET));
+            }
+        } catch (IOException e) {
+            System.out.println(Colors.RED + "Error viewing laptops: " + e.getMessage() + Colors.RESET);
+        }
+    }
 }

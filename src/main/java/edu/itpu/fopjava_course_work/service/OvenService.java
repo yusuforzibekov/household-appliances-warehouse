@@ -13,4 +13,8 @@ public interface OvenService {
     List<Oven> getOvensByCapacity(String searchOvenByCapacity) throws IOException;
 
     List<Oven> getAll() throws IOException;
+
+    void addOven(Oven oven) throws IOException;
+
+    boolean removeOven(int id) throws IOException;
 }

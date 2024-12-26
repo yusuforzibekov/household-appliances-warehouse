@@ -1,8 +1,5 @@
 package edu.itpu.fopjava_course_work.service;
 
-import edu.itpu.fopjava_course_work.dao.implementation.LaptopDAOImpl;
-import edu.itpu.fopjava_course_work.dao.implementation.RefrigeratorDAOImpl;
-import edu.itpu.fopjava_course_work.dao.implementation.OvenDAOImpl;
 import edu.itpu.fopjava_course_work.entity.Laptop;
 import edu.itpu.fopjava_course_work.entity.Refrigerator;
 import edu.itpu.fopjava_course_work.entity.Oven;
@@ -15,16 +12,16 @@ import java.util.Map;
 public class AdminService {
     private Map<String, String> users = new HashMap<>();
     private boolean isAuthorized = false;
-    private LaptopDAOImpl laptopDAO;
-    private RefrigeratorDAOImpl refrigeratorDAO;
-    private OvenDAOImpl ovenDAO;
+    private LaptopService laptopService;
+    private RefrigeratorService refrigeratorService;
+    private OvenService ovenService;
 
-    public AdminService() {
+    public AdminService(LaptopService laptopService, RefrigeratorService refrigeratorService, OvenService ovenService) {
         // Add default admin user
         users.put("admin", "admin123");
-        laptopDAO = new LaptopDAOImpl();
-        refrigeratorDAO = new RefrigeratorDAOImpl();
-        ovenDAO = new OvenDAOImpl();
+        this.laptopService = laptopService;
+        this.refrigeratorService = refrigeratorService;
+        this.ovenService = ovenService;
     }
 
     public boolean authorize(String username, String password) {
@@ -37,7 +34,7 @@ public class AdminService {
 
     public void addLaptop(Laptop laptop) throws IOException {
         if (isAuthorized) {
-            laptopDAO.createLaptop(laptop);
+            laptopService.addLaptop(laptop);
         } else {
             throw new SecurityException("Not authorized");
         }
@@ -45,7 +42,7 @@ public class AdminService {
 
     public void addRefrigerator(Refrigerator refrigerator) throws IOException {
         if (isAuthorized) {
-            refrigeratorDAO.createRefrigerator(refrigerator);
+            refrigeratorService.addRefrigerator(refrigerator);
         } else {
             throw new SecurityException("Not authorized");
         }
@@ -53,7 +50,7 @@ public class AdminService {
 
     public void addOven(Oven oven) throws IOException {
         if (isAuthorized) {
-            ovenDAO.createOven(oven);
+            ovenService.addOven(oven);
         } else {
             throw new SecurityException("Not authorized");
         }
@@ -61,7 +58,7 @@ public class AdminService {
 
     public void removeLaptop(int id) throws IOException {
         if (isAuthorized) {
-            laptopDAO.deleteLaptop(id);
+            laptopService.removeLaptop(id);
         } else {
             throw new SecurityException("Not authorized");
         }
@@ -69,7 +66,7 @@ public class AdminService {
 
     public void removeRefrigerator(int id) throws IOException {
         if (isAuthorized) {
-            refrigeratorDAO.deleteRefrigerator(id);
+            refrigeratorService.removeRefrigerator(id);
         } else {
             throw new SecurityException("Not authorized");
         }
@@ -77,7 +74,7 @@ public class AdminService {
 
     public void removeOven(int id) throws IOException {
         if (isAuthorized) {
-            ovenDAO.deleteOven(id);
+            ovenService.removeOven(id);
         } else {
             throw new SecurityException("Not authorized");
         }
@@ -85,7 +82,7 @@ public class AdminService {
 
     public List<Laptop> getLaptops() throws IOException {
         if (isAuthorized) {
-            return laptopDAO.getLaptopList();
+            return laptopService.getAll();
         } else {
             throw new SecurityException("Not authorized");
         }
@@ -93,7 +90,7 @@ public class AdminService {
 
     public List<Refrigerator> getRefrigerators() throws IOException {
         if (isAuthorized) {
-            return refrigeratorDAO.getRefrigeratorsList();
+            return refrigeratorService.getAll();
         } else {
             throw new SecurityException("Not authorized");
         }
@@ -101,7 +98,7 @@ public class AdminService {
 
     public List<Oven> getOvens() throws IOException {
         if (isAuthorized) {
-            return ovenDAO.getOvensList();
+            return ovenService.getAll();
         } else {
             throw new SecurityException("Not authorized");
         }

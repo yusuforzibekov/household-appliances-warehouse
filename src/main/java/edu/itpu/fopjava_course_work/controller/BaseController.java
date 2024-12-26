@@ -23,7 +23,7 @@ public class BaseController {
         refrigeratorOperations = new RefrigeratorController(serviceFactory.getRefrigeratorService());
         feedbackController = new FeedbackController();
         helpController = new HelpController();
-        adminController = new AdminController();
+        adminController = new AdminController(laptopOperations, ovenOperations, refrigeratorOperations);
     }
 
     public void start() throws IOException {

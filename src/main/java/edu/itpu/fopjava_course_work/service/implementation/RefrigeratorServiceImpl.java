@@ -1,34 +1,28 @@
 package edu.itpu.fopjava_course_work.service.implementation;
 
+import edu.itpu.fopjava_course_work.dao.RefrigeratorDAO;
+import edu.itpu.fopjava_course_work.dao.DAOFactory;
+import edu.itpu.fopjava_course_work.entity.Refrigerator;
+import edu.itpu.fopjava_course_work.service.RefrigeratorService;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.itpu.fopjava_course_work.dao.RefrigeratorDAO;
-import edu.itpu.fopjava_course_work.dao.implementation.RefrigeratorDAOImpl;
-import edu.itpu.fopjava_course_work.entity.Refrigerator;
-import edu.itpu.fopjava_course_work.service.RefrigeratorService;
-
-
-
 public class RefrigeratorServiceImpl implements RefrigeratorService {
-    // Dependency Injection of RefrigeratorDao
-    private final RefrigeratorDAO refrigeratorDao = new RefrigeratorDAOImpl();
+    private final RefrigeratorDAO refrigeratorDAO;
 
-    public RefrigeratorServiceImpl(RefrigeratorDAO refrigeratorDao) {
-        // Constructor injection of RefrigeratorDao
-        // this.refrigeratorDao = refrigeratorDao;
+    public RefrigeratorServiceImpl() {
+        this.refrigeratorDAO = DAOFactory.getInstance().getRefrigeratorDAO();
     }
 
     @Override
     public List<Refrigerator> getRefrigeratorsBySearch(String searchRefrigerator) throws IOException {
-        // Retrieve the list of refrigerators from the data source
+        List<Refrigerator> refrigerators = refrigeratorDAO.getRefrigeratorsList();
         String normalizedSearchTerm = searchRefrigerator.toLowerCase();
-        List<Refrigerator> refrigeratorList = refrigeratorDao.getRefrigeratorsList();
         List<Refrigerator> searchRefrigeratorList = new ArrayList<>();
 
-        // Filter the list based on the search criteria
-        for (Refrigerator refrigerator : refrigeratorList) {
+        for (Refrigerator refrigerator : refrigerators) {
             if (refrigerator.toString().contains(searchRefrigerator)) {
                 searchRefrigeratorList.add(refrigerator);
             } else if (refrigerator.toString().toLowerCase().contains(normalizedSearchTerm)) {
@@ -40,10 +34,9 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
 
     @Override
     public List<Refrigerator> getRefrigeratorsByPowerConsumption(String searchRefrigeratorByPowerConsumption) throws IOException {
-        List<Refrigerator> refrigeratorList = refrigeratorDao.getRefrigeratorsList();
+        List<Refrigerator> refrigerators = refrigeratorDAO.getRefrigeratorsList();
         List<Refrigerator> searchRefrigeratorList = new ArrayList<>();
-        for (Refrigerator refrigerator : refrigeratorList) {
-            // Check for exact match of search term in the power consumption attribute
+        for (Refrigerator refrigerator : refrigerators) {
             if (String.valueOf(refrigerator.getPowerConsumption()).equalsIgnoreCase(searchRefrigeratorByPowerConsumption)) {
                 searchRefrigeratorList.add(refrigerator);
             }
@@ -53,10 +46,9 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
 
     @Override
     public List<Refrigerator> getRefrigeratorsByOverallCapacity(String searchRefrigeratorByOverallCapacity) throws IOException {
-        List<Refrigerator> refrigeratorList = refrigeratorDao.getRefrigeratorsList();
+        List<Refrigerator> refrigerators = refrigeratorDAO.getRefrigeratorsList();
         List<Refrigerator> searchRefrigeratorList = new ArrayList<>();
-        for (Refrigerator refrigerator : refrigeratorList) {
-            // Check for exact match of search term in the overall capacity attribute
+        for (Refrigerator refrigerator : refrigerators) {
             if (String.valueOf(refrigerator.getOverallCapacity()).equalsIgnoreCase(searchRefrigeratorByOverallCapacity)) {
                 searchRefrigeratorList.add(refrigerator);
             }
@@ -66,7 +58,17 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
 
     @Override
     public List<Refrigerator> getAll() throws IOException {
-        // Retrieve and return the list of all refrigerators
-        return refrigeratorDao.getRefrigeratorsList();
+        return refrigeratorDAO.getRefrigeratorsList();
+    }
+
+    @Override
+    public void addRefrigerator(Refrigerator refrigerator) throws IOException {
+        refrigeratorDAO.createRefrigerator(refrigerator);
+    }
+
+    @Override
+    public boolean removeRefrigerator(int id) throws IOException {
+        refrigeratorDAO.deleteRefrigerator(id);
+        return true;
     }
 }

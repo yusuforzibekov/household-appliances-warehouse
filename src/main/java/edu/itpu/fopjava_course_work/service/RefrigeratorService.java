@@ -13,4 +13,7 @@ public interface RefrigeratorService {
     List<Refrigerator> getRefrigeratorsByOverallCapacity(String searchRefrigeratorByOverallCapacity) throws IOException;
 
     List<Refrigerator> getAll() throws IOException;
+
+    void addRefrigerator(Refrigerator refrigerator) throws IOException;
+    boolean removeRefrigerator(int id) throws IOException;
 }

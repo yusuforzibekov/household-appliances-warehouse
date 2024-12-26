@@ -1,32 +1,28 @@
 package edu.itpu.fopjava_course_work.service.implementation;
 
+import edu.itpu.fopjava_course_work.dao.OvenDAO;
+import edu.itpu.fopjava_course_work.dao.DAOFactory;
+import edu.itpu.fopjava_course_work.entity.Oven;
+import edu.itpu.fopjava_course_work.service.OvenService;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.itpu.fopjava_course_work.dao.OvenDAO;
-import edu.itpu.fopjava_course_work.dao.implementation.OvenDAOImpl;
-import edu.itpu.fopjava_course_work.entity.Oven;
-import edu.itpu.fopjava_course_work.service.OvenService;
-
 public class OvenServiceImpl implements OvenService {
-    // Dependency Injection of OvenDao
-    private final OvenDAO ovenDao = new OvenDAOImpl();
+    private final OvenDAO ovenDAO;
 
-    public OvenServiceImpl(OvenDAO ovenDao) {
-        // Constructor injection of OvenDao
-        // this.ovenDao = ovenDao;
+    public OvenServiceImpl() {
+        this.ovenDAO = DAOFactory.getInstance().getOvenDAO();
     }
 
     @Override
     public List<Oven> getOvensBySearch(String searchOven) throws IOException {
-        // Retrieve the list of ovens from the data source
+        List<Oven> ovens = ovenDAO.getOvensList();
         String normalizedSearchTerm = searchOven.toLowerCase();
-        List<Oven> ovenList = ovenDao.getOvensList();
         List<Oven> searchOvenList = new ArrayList<>();
 
-        // Filter the list based on the search criteria
-        for (Oven oven : ovenList) {
+        for (Oven oven : ovens) {
             if (oven.toString().contains(searchOven)) {
                 searchOvenList.add(oven);
             } else if (oven.toString().toLowerCase().contains(normalizedSearchTerm)) {
@@ -38,10 +34,9 @@ public class OvenServiceImpl implements OvenService {
 
     @Override
     public List<Oven> getOvensByPowerConsumption(String searchOvenByPowerConsumption) throws IOException {
-        List<Oven> ovenList = ovenDao.getOvensList();
+        List<Oven> ovens = ovenDAO.getOvensList();
         List<Oven> searchOvenList = new ArrayList<>();
-        for (Oven oven : ovenList) {
-            // Check for exact match of search term in the power consumption attribute
+        for (Oven oven : ovens) {
             if (String.valueOf(oven.getPowerConsumption()).equalsIgnoreCase(searchOvenByPowerConsumption)) {
                 searchOvenList.add(oven);
             }
@@ -51,10 +46,9 @@ public class OvenServiceImpl implements OvenService {
 
     @Override
     public List<Oven> getOvensByCapacity(String searchOvenByCapacity) throws IOException {
-        List<Oven> ovenList = ovenDao.getOvensList();
+        List<Oven> ovens = ovenDAO.getOvensList();
         List<Oven> searchOvenList = new ArrayList<>();
-        for (Oven oven : ovenList) {
-            // Check for exact match of search term in the capacity attribute
+        for (Oven oven : ovens) {
             if (String.valueOf(oven.getCapacity()).equalsIgnoreCase(searchOvenByCapacity)) {
                 searchOvenList.add(oven);
             }
@@ -64,7 +58,17 @@ public class OvenServiceImpl implements OvenService {
 
     @Override
     public List<Oven> getAll() throws IOException {
-        // Retrieve and return the list of all ovens
-        return ovenDao.getOvensList();
+        return ovenDAO.getOvensList();
+    }
+
+    @Override
+    public void addOven(Oven oven) throws IOException {
+        ovenDAO.createOven(oven);
+    }
+
+    @Override
+    public boolean removeOven(int id) throws IOException {
+        ovenDAO.deleteOven(id);
+        return true;
     }
 }
