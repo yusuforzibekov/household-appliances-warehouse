@@ -26,66 +26,71 @@ public class RefrigeratorController {
             System.out.println("5. Back to Main Menu");
             System.out.println(Colors.BOLD + Colors.BLUE + "===============================" + Colors.RESET);
 
-            System.out.print("Please enter your choice: ");
-            int refrigeratorChoice = UserInputHandler.readInteger(scanner);
+            try {
+                System.out.print("Please enter your choice: ");
+                int refrigeratorChoice = UserInputHandler.readInteger(scanner);
 
-            switch (refrigeratorChoice) {
-                case 1 -> {
-                    System.out.print("Enter the keyword for the refrigerator: ");
-                    String searchRefrigerator = scanner.next();
-                    List<Refrigerator> refrigeratorList = refrigeratorService
-                            .getRefrigeratorsBySearch(searchRefrigerator);
-                    if (refrigeratorList.isEmpty()) {
-                        System.out.println(
-                                Colors.RED + "No results found for '" + searchRefrigerator + "'." + Colors.RESET);
-                    } else {
-                        refrigeratorList
-                                .forEach(refrigerator -> System.out.println(Colors.CPU + refrigerator + Colors.RESET));
+                switch (refrigeratorChoice) {
+                    case 1 -> {
+                        System.out.print("Enter the keyword for the refrigerator: ");
+                        String searchRefrigerator = scanner.next();
+                        List<Refrigerator> refrigeratorList = refrigeratorService
+                                .getRefrigeratorsBySearch(searchRefrigerator);
+                        if (refrigeratorList.isEmpty()) {
+                            System.out.println(
+                                    Colors.RED + "No results found for '" + searchRefrigerator + "'." + Colors.RESET);
+                        } else {
+                            refrigeratorList
+                                    .forEach(refrigerator -> System.out.println(Colors.CPU + refrigerator + Colors.RESET));
+                        }
                     }
-                }
 
-                case 2 -> {
-                    System.out.print("Enter the power consumption of the refrigerator: ");
-                    String searchRefrigeratorByPowerConsumption = scanner.next();
-                    List<Refrigerator> refrigeratorList = refrigeratorService
-                            .getRefrigeratorsByPowerConsumption(searchRefrigeratorByPowerConsumption);
-                    if (refrigeratorList.isEmpty()) {
-                        System.out.println(Colors.RED + "No results found for power consumption '"
-                                + searchRefrigeratorByPowerConsumption + "'." + Colors.RESET);
-                        System.out.println("Try searching with different values.");
-                    } else {
-                        refrigeratorList
-                                .forEach(refrigerator -> System.out.println(Colors.CPU + refrigerator + Colors.RESET));
+                    case 2 -> {
+                        System.out.print("Enter the power consumption of the refrigerator: ");
+                        String searchRefrigeratorByPowerConsumption = scanner.next();
+                        List<Refrigerator> refrigeratorList = refrigeratorService
+                                .getRefrigeratorsByPowerConsumption(searchRefrigeratorByPowerConsumption);
+                        if (refrigeratorList.isEmpty()) {
+                            System.out.println(Colors.RED + "No results found for power consumption '"
+                                    + searchRefrigeratorByPowerConsumption + "'." + Colors.RESET);
+                            System.out.println("Try searching with different values.");
+                        } else {
+                            refrigeratorList
+                                    .forEach(refrigerator -> System.out.println(Colors.CPU + refrigerator + Colors.RESET));
+                        }
                     }
-                }
 
-                case 3 -> {
-                    System.out.print("Enter the overall capacity of the refrigerator: ");
-                    String searchRefrigeratorByOverallCapacity = scanner.next();
-                    List<Refrigerator> refrigeratorList = refrigeratorService
-                            .getRefrigeratorsByOverallCapacity(searchRefrigeratorByOverallCapacity);
-                    if (refrigeratorList.isEmpty()) {
-                        System.out.println(Colors.RED + "No results found for overall capacity '"
-                                + searchRefrigeratorByOverallCapacity + "'." + Colors.RESET);
-                        System.out.println("Try searching with different values.");
-                    } else {
-                        refrigeratorList
-                                .forEach(refrigerator -> System.out.println(Colors.CPU + refrigerator + Colors.RESET));
+                    case 3 -> {
+                        System.out.print("Enter the overall capacity of the refrigerator: ");
+                        String searchRefrigeratorByOverallCapacity = scanner.next();
+                        List<Refrigerator> refrigeratorList = refrigeratorService
+                                .getRefrigeratorsByOverallCapacity(searchRefrigeratorByOverallCapacity);
+                        if (refrigeratorList.isEmpty()) {
+                            System.out.println(Colors.RED + "No results found for overall capacity '"
+                                    + searchRefrigeratorByOverallCapacity + "'." + Colors.RESET);
+                            System.out.println("Try searching with different values.");
+                        } else {
+                            refrigeratorList
+                                    .forEach(refrigerator -> System.out.println(Colors.CPU + refrigerator + Colors.RESET));
+                        }
                     }
-                }
 
-                case 4 -> {
-                    System.out.println(Colors.GREEN + "List of all refrigerators:" + Colors.RESET);
-                    List<Refrigerator> refrigeratorList = refrigeratorService.getAll();
-                    refrigeratorList
-                            .forEach(refrigerator -> System.out.println(Colors.CYAN + refrigerator + Colors.RESET));
-                }
+                    case 4 -> {
+                        System.out.println(Colors.GREEN + "List of all refrigerators:" + Colors.RESET);
+                        List<Refrigerator> refrigeratorList = refrigeratorService.getAll();
+                        refrigeratorList
+                                .forEach(refrigerator -> System.out.println(Colors.CYAN + refrigerator + Colors.RESET));
+                    }
 
-                case 5 -> {
-                    // Go back to the main menu
-                    return;
+                    case 5 -> {
+                        // Go back to the main menu
+                        return;
+                    }
+                    default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
                 }
-                default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
+            } catch (NumberFormatException e) {
+                System.out.println(Colors.RED + "Invalid input. Please enter a number." + Colors.RESET);
+                scanner.nextLine(); // Clear the invalid input
             }
         }
     }
@@ -100,17 +105,22 @@ public class RefrigeratorController {
             System.out.println("4. Back to Admin Menu");
             System.out.println(Colors.BOLD + Colors.BLUE + "=====================================" + Colors.RESET);
 
-            System.out.print("Please enter your choice: ");
-            int choice = UserInputHandler.readInteger(scanner);
+            try {
+                System.out.print("Please enter your choice: ");
+                int choice = UserInputHandler.readInteger(scanner);
 
-            switch (choice) {
-                case 1 -> addRefrigerator(scanner);
-                case 2 -> removeRefrigerator(scanner);
-                case 3 -> viewRefrigerators();
-                case 4 -> {
-                    return;
+                switch (choice) {
+                    case 1 -> addRefrigerator(scanner);
+                    case 2 -> removeRefrigerator(scanner);
+                    case 3 -> viewRefrigerators();
+                    case 4 -> {
+                        return;
+                    }
+                    default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
                 }
-                default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
+            } catch (NumberFormatException e) {
+                System.out.println(Colors.RED + "Invalid input. Please enter a number." + Colors.RESET);
+                scanner.nextLine(); // Clear the invalid input
             }
         }
     }
@@ -147,14 +157,16 @@ public class RefrigeratorController {
 
     private void removeRefrigerator(Scanner scanner) {
         System.out.print("Enter the ID of the refrigerator to remove: ");
-        int id = scanner.nextInt();
         try {
+            int id = Integer.parseInt(scanner.next());
             boolean removed = refrigeratorService.removeRefrigerator(id);
             if (removed) {
                 System.out.println(Colors.GREEN + "Refrigerator removed successfully!" + Colors.RESET);
             } else {
                 System.out.println(Colors.RED + "Refrigerator not found." + Colors.RESET);
             }
+        } catch (NumberFormatException e) {
+            System.out.println(Colors.RED + "Invalid input. Please enter a valid number." + Colors.RESET);
         } catch (IOException e) {
             System.out.println(Colors.RED + "Error removing refrigerator: " + e.getMessage() + Colors.RESET);
         }

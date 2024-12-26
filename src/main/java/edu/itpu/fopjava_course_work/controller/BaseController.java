@@ -49,23 +49,28 @@ public class BaseController {
             System.out.println("7. Exit");
             System.out.println(Colors.BOLD + Colors.BLUE + "=================" + Colors.RESET);
 
-            System.out.print("Please enter your choice: ");
-            int mainMenuChoice = UserInputHandler.readInteger(scanner);
+            try {
+                System.out.print("Please enter your choice: ");
+                int mainMenuChoice = UserInputHandler.readInteger(scanner);
 
-            // Handle main menu choices
-            switch (mainMenuChoice) {
-                case 1 -> laptopOperations.handleLaptops(scanner);
-                case 2 -> ovenOperations.handleOvens(scanner);
-                case 3 -> refrigeratorOperations.handleRefrigerators(scanner);
-                case 4 -> helpController.handleHelp(scanner);
-                case 5 -> feedbackController.handleFeedback(scanner);
-                case 6 -> adminController.start();
-                case 7 -> {
-                    System.out.println(Colors.YELLOW + "Exiting the program. Goodbye!" + Colors.RESET);
-                    scanner.close();
-                    System.exit(0);
+                // Handle main menu choices
+                switch (mainMenuChoice) {
+                    case 1 -> laptopOperations.handleLaptops(scanner);
+                    case 2 -> ovenOperations.handleOvens(scanner);
+                    case 3 -> refrigeratorOperations.handleRefrigerators(scanner);
+                    case 4 -> helpController.handleHelp(scanner);
+                    case 5 -> feedbackController.handleFeedback(scanner);
+                    case 6 -> adminController.start();
+                    case 7 -> {
+                        System.out.println(Colors.YELLOW + "Exiting the program. Goodbye!" + Colors.RESET);
+                        scanner.close();
+                        System.exit(0);
+                    }
+                    default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
                 }
-                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
+            } catch (NumberFormatException e) {
+                System.out.println(Colors.RED + "Invalid input. Please enter a number." + Colors.RESET);
+                scanner.nextLine(); // Clear the invalid input
             }
         }
     }

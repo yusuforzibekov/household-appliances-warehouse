@@ -26,57 +26,62 @@ public class LaptopController {
             System.out.println("5. Back to Main Menu");
             System.out.println(Colors.BOLD + Colors.BLUE + "=========================" + Colors.RESET);
 
-            System.out.print("Please enter your choice: ");
-            int laptopChoice = UserInputHandler.readInteger(scanner);
+            try {
+                System.out.print("Please enter your choice: ");
+                int laptopChoice = UserInputHandler.readInteger(scanner);
 
-            switch (laptopChoice) {
-                case 1 -> {
-                    System.out.print("Enter the keyword for the laptop: ");
-                    String searchLaptop = scanner.next();
-                    List<Laptop> laptopList = laptopService.getLaptopBySearch(searchLaptop);
-                    if (laptopList.isEmpty()) {
-                        System.out.println(Colors.RED + "No results found for '" + searchLaptop + "'." + Colors.RESET);
-                    } else {
-                        System.out.println(Colors.GREEN + "Search results:" + Colors.RESET);
+                switch (laptopChoice) {
+                    case 1 -> {
+                        System.out.print("Enter the keyword for the laptop: ");
+                        String searchLaptop = scanner.next();
+                        List<Laptop> laptopList = laptopService.getLaptopBySearch(searchLaptop);
+                        if (laptopList.isEmpty()) {
+                            System.out.println(Colors.RED + "No results found for '" + searchLaptop + "'." + Colors.RESET);
+                        } else {
+                            System.out.println(Colors.GREEN + "Search results:" + Colors.RESET);
+                            laptopList.forEach(laptop -> System.out.println(Colors.CYAN + laptop + Colors.RESET));
+                        }
+                    }
+                    case 2 -> {
+                        System.out.print("Enter the OS of the laptop: ");
+                        String searchLaptopByOS = scanner.next();
+                        List<Laptop> laptopList = laptopService.getLaptopsByOS(searchLaptopByOS);
+                        if (laptopList.isEmpty()) {
+                            System.out.println(
+                                    Colors.RED + "No results found for OS '" + searchLaptopByOS + "'." + Colors.RESET);
+                            System.out.println("Try searching with the terms such as 'Windows' or 'Linux'.");
+                        } else {
+                            System.out.println(Colors.GREEN + "Search results:" + Colors.RESET);
+                            laptopList.forEach(laptop -> System.out.println(Colors.CYAN + laptop + Colors.RESET));
+                        }
+                    }
+                    case 3 -> {
+                        System.out.print("Enter the CPU of the laptop: ");
+                        String searchLaptopByCPU = scanner.next();
+                        List<Laptop> laptopList = laptopService.getLaptopsByCPU(searchLaptopByCPU);
+                        if (laptopList.isEmpty()) {
+                            System.out.println(
+                                    Colors.RED + "No results found for CPU '" + searchLaptopByCPU + "'." + Colors.RESET);
+                            System.out.println("Try searching with different CPUs like 1.2, 2.2, or 3.2.");
+                        } else {
+                            System.out.println(Colors.GREEN + "Search results:" + Colors.RESET);
+                            laptopList.forEach(laptop -> System.out.println(Colors.CYAN + laptop + Colors.RESET));
+                        }
+                    }
+                    case 4 -> {
+                        System.out.println(Colors.GREEN + "List of all laptops:" + Colors.RESET);
+                        List<Laptop> laptopList = laptopService.getAll();
                         laptopList.forEach(laptop -> System.out.println(Colors.CYAN + laptop + Colors.RESET));
                     }
-                }
-                case 2 -> {
-                    System.out.print("Enter the OS of the laptop: ");
-                    String searchLaptopByOS = scanner.next();
-                    List<Laptop> laptopList = laptopService.getLaptopsByOS(searchLaptopByOS);
-                    if (laptopList.isEmpty()) {
-                        System.out.println(
-                                Colors.RED + "No results found for OS '" + searchLaptopByOS + "'." + Colors.RESET);
-                        System.out.println("Try searching with the terms such as 'Windows' or 'Linux'.");
-                    } else {
-                        System.out.println(Colors.GREEN + "Search results:" + Colors.RESET);
-                        laptopList.forEach(laptop -> System.out.println(Colors.CYAN + laptop + Colors.RESET));
+                    case 5 -> {
+                        // Go back to the main menu
+                        return;
                     }
+                    default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
                 }
-                case 3 -> {
-                    System.out.print("Enter the CPU of the laptop: ");
-                    String searchLaptopByCPU = scanner.next();
-                    List<Laptop> laptopList = laptopService.getLaptopsByCPU(searchLaptopByCPU);
-                    if (laptopList.isEmpty()) {
-                        System.out.println(
-                                Colors.RED + "No results found for CPU '" + searchLaptopByCPU + "'." + Colors.RESET);
-                        System.out.println("Try searching with different CPUs like 1.2, 2.2, or 3.2.");
-                    } else {
-                        System.out.println(Colors.GREEN + "Search results:" + Colors.RESET);
-                        laptopList.forEach(laptop -> System.out.println(Colors.CYAN + laptop + Colors.RESET));
-                    }
-                }
-                case 4 -> {
-                    System.out.println(Colors.GREEN + "List of all laptops:" + Colors.RESET);
-                    List<Laptop> laptopList = laptopService.getAll();
-                    laptopList.forEach(laptop -> System.out.println(Colors.CYAN + laptop + Colors.RESET));
-                }
-                case 5 -> {
-                    // Go back to the main menu
-                    return;
-                }
-                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
+            } catch (NumberFormatException e) {
+                System.out.println(Colors.RED + "Invalid input. Please enter a number." + Colors.RESET);
+                scanner.nextLine(); // Clear the invalid input
             }
         }
     }
@@ -90,17 +95,22 @@ public class LaptopController {
             System.out.println("4. Back to Admin Menu");
             System.out.println(Colors.BOLD + Colors.BLUE + "===============================" + Colors.RESET);
 
-            System.out.print("Please enter your choice: ");
-            int choice = UserInputHandler.readInteger(scanner);
+            try {
+                System.out.print("Please enter your choice: ");
+                int choice = UserInputHandler.readInteger(scanner);
 
-            switch (choice) {
-                case 1 -> addLaptop(scanner);
-                case 2 -> removeLaptop(scanner);
-                case 3 -> viewLaptops();
-                case 4 -> {
-                    return;
+                switch (choice) {
+                    case 1 -> addLaptop(scanner);
+                    case 2 -> removeLaptop(scanner);
+                    case 3 -> viewLaptops();
+                    case 4 -> {
+                        return;
+                    }
+                    default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
                 }
-                default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
+            } catch (NumberFormatException e) {
+                System.out.println(Colors.RED + "Invalid input. Please enter a number." + Colors.RESET);
+                scanner.nextLine(); // Clear the invalid input
             }
         }
     }
@@ -143,14 +153,16 @@ public class LaptopController {
 
     private void removeLaptop(Scanner scanner) {
         System.out.print("Enter the ID of the laptop to remove: ");
-        int id = scanner.nextInt();
         try {
+            int id = Integer.parseInt(scanner.next());
             boolean removed = laptopService.removeLaptop(id);
             if (removed) {
                 System.out.println(Colors.GREEN + "Laptop removed successfully!" + Colors.RESET);
             } else {
                 System.out.println(Colors.RED + "Laptop not found." + Colors.RESET);
             }
+        } catch (NumberFormatException e) {
+            System.out.println(Colors.RED + "Invalid input. Please enter a valid number." + Colors.RESET);
         } catch (IOException e) {
             System.out.println(Colors.RED + "Error removing laptop: " + e.getMessage() + Colors.RESET);
         }

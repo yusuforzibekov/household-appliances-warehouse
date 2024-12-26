@@ -37,18 +37,23 @@ public class AdminController {
                 System.out.println("4. Exit");
                 System.out.println(Colors.BOLD + Colors.BLUE + "==================" + Colors.RESET);
 
-                System.out.print("Please enter your choice: ");
-                int choice = UserInputHandler.readInteger(scanner);
+                try {
+                    System.out.print("Please enter your choice: ");
+                    int choice = UserInputHandler.readInteger(scanner);
 
-                switch (choice) {
-                    case 1 -> laptopController.handleAdminOperations(scanner);
-                    case 2 -> ovenController.handleAdminOperations(scanner);
-                    case 3 -> refrigeratorController.handleAdminOperations(scanner);
-                    case 4 -> {
-                        System.out.println(Colors.YELLOW + "Exiting the admin panel. Goodbye!" + Colors.RESET);
-                        return;
+                    switch (choice) {
+                        case 1 -> laptopController.handleAdminOperations(scanner);
+                        case 2 -> ovenController.handleAdminOperations(scanner);
+                        case 3 -> refrigeratorController.handleAdminOperations(scanner);
+                        case 4 -> {
+                            System.out.println(Colors.YELLOW + "Exiting the admin panel. Goodbye!" + Colors.RESET);
+                            return;
+                        }
+                        default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
                     }
-                    default -> System.out.println(Colors.RED + "Invalid choice. Please try again." + Colors.RESET);
+                } catch (NumberFormatException e) {
+                    System.out.println(Colors.RED + "Invalid input. Please enter a number." + Colors.RESET);
+                    scanner.nextLine(); // Clear the invalid input
                 }
             }
         } else {
