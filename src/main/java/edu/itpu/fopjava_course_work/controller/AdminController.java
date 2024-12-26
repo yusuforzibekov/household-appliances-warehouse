@@ -3,6 +3,7 @@ package edu.itpu.fopjava_course_work.controller;
 import edu.itpu.fopjava_course_work.service.AdminService;
 import edu.itpu.fopjava_course_work.entity.Laptop;
 import edu.itpu.fopjava_course_work.entity.Refrigerator;
+import edu.itpu.fopjava_course_work.entity.Oven;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,11 +29,14 @@ public class AdminController {
                 switch (choice) {
                     case 1 -> addAppliance("Laptop");
                     case 2 -> addAppliance("Refrigerator");
-                    case 3 -> removeAppliance("Laptop");
-                    case 4 -> removeAppliance("Refrigerator");
-                    case 5 -> viewAppliances("Laptop");
-                    case 6 -> viewAppliances("Refrigerator");
-                    case 7 -> exit = true;
+                    case 3 -> addAppliance("Oven");
+                    case 4 -> removeAppliance("Laptop");
+                    case 5 -> removeAppliance("Refrigerator");
+                    case 6 -> removeAppliance("Oven");
+                    case 7 -> viewAppliances("Laptop");
+                    case 8 -> viewAppliances("Refrigerator");
+                    case 9 -> viewAppliances("Oven");
+                    case 10 -> exit = true;
                     default -> System.out.println("Invalid choice. Please try again.");
                 }
             }
@@ -53,11 +57,14 @@ public class AdminController {
         System.out.println("\nAdmin Menu:");
         System.out.println("1. Add Laptop");
         System.out.println("2. Add Refrigerator");
-        System.out.println("3. Remove Laptop");
-        System.out.println("4. Remove Refrigerator");
-        System.out.println("5. View Laptops");
-        System.out.println("6. View Refrigerators");
-        System.out.println("7. Exit");
+        System.out.println("3. Add Oven");
+        System.out.println("4. Remove Laptop");
+        System.out.println("5. Remove Refrigerator");
+        System.out.println("6. Remove Oven");
+        System.out.println("7. View Laptops");
+        System.out.println("8. View Refrigerators");
+        System.out.println("9. View Ovens");
+        System.out.println("10. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -94,6 +101,19 @@ public class AdminController {
                 );
                 adminService.addRefrigerator(refrigerator);
                 System.out.println("Refrigerator added successfully.");
+            } else if (type.equals("Oven")) {
+                Oven oven = new Oven(
+                    null,
+                    getIntInput("Enter power consumption (e.g., 1500): "),
+                    getIntInput("Enter capacity (e.g., 32): "),
+                    getIntInput("Enter weight (e.g., 10): "),
+                    getDoubleInput("Enter width (e.g., 59.5): "),
+                    getDoubleInput("Enter height (e.g., 45.5): "),
+                    getIntInput("Enter depth (e.g., 60): "),
+                    getIntInput("Enter price (e.g., 12000): ")
+                );
+                adminService.addOven(oven);
+                System.out.println("Oven added successfully.");
             }
         } catch (IOException e) {
             System.out.println("Error adding " + type.toLowerCase() + ": " + e.getMessage());
@@ -108,6 +128,8 @@ public class AdminController {
                 adminService.removeLaptop(id);
             } else if (type.equals("Refrigerator")) {
                 adminService.removeRefrigerator(id);
+            } else if (type.equals("Oven")) {
+                adminService.removeOven(id);
             }
             System.out.println(type + " removed successfully.");
         } catch (NumberFormatException e) {
@@ -128,6 +150,11 @@ public class AdminController {
                 List<Refrigerator> refrigerators = adminService.getRefrigerators();
                 for (Refrigerator refrigerator : refrigerators) {
                     System.out.println(refrigerator);
+                }
+            } else if (type.equals("Oven")) {
+                List<Oven> ovens = adminService.getOvens();
+                for (Oven oven : ovens) {
+                    System.out.println(oven);
                 }
             }
         } catch (IOException e) {

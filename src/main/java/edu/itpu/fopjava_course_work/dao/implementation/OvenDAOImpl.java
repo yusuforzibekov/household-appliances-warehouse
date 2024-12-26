@@ -2,6 +2,7 @@ package edu.itpu.fopjava_course_work.dao.implementation;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import edu.itpu.fopjava_course_work.dao.OvenDAO;
@@ -50,5 +51,40 @@ public class OvenDAOImpl implements OvenDAO {
 
         // Return the list of `Oven` objects
         return ovenList;
+    }
+
+    @Override
+    public void createOven(Oven oven) throws IOException {
+        List<String[]> rows = readMethod();
+        int newId = rows.size();
+        String[] ovenData = new String[] {
+            String.valueOf(newId),
+            String.valueOf(oven.getPowerConsumption()),
+            String.valueOf(oven.getCapacity()),
+            String.valueOf(oven.getWeight()),
+            String.valueOf(oven.getWidth()),
+            String.valueOf(oven.getHeight()),
+            String.valueOf(oven.getDepth()),
+            String.valueOf(oven.getPrice())
+        };
+        rows.add(ovenData);
+        CSVUtils.writeCSV(CSV_FILE_PATH, rows);
+    }
+
+    @Override
+    public void deleteOven(int id) throws IOException {
+        List<String[]> rows = CSVUtils.readCSV(CSV_FILE_PATH);
+        Iterator<String[]> iterator = rows.iterator();
+        while (iterator.hasNext()) {
+            String[] ovenData = iterator.next();
+            if (ovenData[0].equals("ID")) {
+                continue;
+            }
+            if (Integer.parseInt(ovenData[0]) == id) {
+                iterator.remove();
+                break;
+            }
+        }
+        CSVUtils.writeCSV(CSV_FILE_PATH, rows);
     }
 }
