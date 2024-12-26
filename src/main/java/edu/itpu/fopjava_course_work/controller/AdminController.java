@@ -6,6 +6,7 @@ import edu.itpu.fopjava_course_work.utils.Colors;
 import edu.itpu.fopjava_course_work.utils.UserInputHandler;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class AdminController {
@@ -18,8 +19,16 @@ public class AdminController {
     public AdminController(LaptopController laptopController, OvenController ovenController,
             RefrigeratorController refrigeratorController) {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        this.adminService = new AdminService(serviceFactory.getLaptopService(), serviceFactory.getRefrigeratorService(),
-                serviceFactory.getOvenService());
+        AdminService tempAdminService = null;
+        try {
+            tempAdminService = new AdminService(serviceFactory.getLaptopService(), serviceFactory.getRefrigeratorService(),
+                    serviceFactory.getOvenService());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(Colors.RED + "Failed to initialize AdminService. Exiting..." + Colors.RESET);
+            System.exit(1);
+        }
+        this.adminService = tempAdminService;
         this.laptopController = laptopController;
         this.ovenController = ovenController;
         this.refrigeratorController = refrigeratorController;
@@ -66,6 +75,15 @@ public class AdminController {
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
-        return adminService.authorize(username, password);
+        return login(username, password);
+    }
+
+    public boolean login(String username, String password) {
+        try {
+            return adminService.authorize(username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
