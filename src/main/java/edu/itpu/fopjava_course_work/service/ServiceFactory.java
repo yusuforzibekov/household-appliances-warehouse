@@ -10,7 +10,8 @@ public final class ServiceFactory {
     private final OvenService ovenService = new OvenServiceImpl();
     private final RefrigeratorService refrigeratorService = new RefrigeratorServiceImpl();
 
-    private ServiceFactory() {}
+    private ServiceFactory() {
+    }
 
     public static ServiceFactory getInstance() {
         return instance;

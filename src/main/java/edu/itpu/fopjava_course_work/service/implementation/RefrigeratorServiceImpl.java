@@ -33,11 +33,13 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
     }
 
     @Override
-    public List<Refrigerator> getRefrigeratorsByPowerConsumption(String searchRefrigeratorByPowerConsumption) throws IOException {
+    public List<Refrigerator> getRefrigeratorsByPowerConsumption(String searchRefrigeratorByPowerConsumption)
+            throws IOException {
         List<Refrigerator> refrigerators = refrigeratorDAO.getRefrigeratorsList();
         List<Refrigerator> searchRefrigeratorList = new ArrayList<>();
         for (Refrigerator refrigerator : refrigerators) {
-            if (String.valueOf(refrigerator.getPowerConsumption()).equalsIgnoreCase(searchRefrigeratorByPowerConsumption)) {
+            if (String.valueOf(refrigerator.getPowerConsumption())
+                    .equalsIgnoreCase(searchRefrigeratorByPowerConsumption)) {
                 searchRefrigeratorList.add(refrigerator);
             }
         }
@@ -45,11 +47,13 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
     }
 
     @Override
-    public List<Refrigerator> getRefrigeratorsByOverallCapacity(String searchRefrigeratorByOverallCapacity) throws IOException {
+    public List<Refrigerator> getRefrigeratorsByOverallCapacity(String searchRefrigeratorByOverallCapacity)
+            throws IOException {
         List<Refrigerator> refrigerators = refrigeratorDAO.getRefrigeratorsList();
         List<Refrigerator> searchRefrigeratorList = new ArrayList<>();
         for (Refrigerator refrigerator : refrigerators) {
-            if (String.valueOf(refrigerator.getOverallCapacity()).equalsIgnoreCase(searchRefrigeratorByOverallCapacity)) {
+            if (String.valueOf(refrigerator.getOverallCapacity())
+                    .equalsIgnoreCase(searchRefrigeratorByOverallCapacity)) {
                 searchRefrigeratorList.add(refrigerator);
             }
         }

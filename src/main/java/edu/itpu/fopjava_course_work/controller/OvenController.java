@@ -45,7 +45,8 @@ public class OvenController {
                     String searchOvenByPowerConsumption = scanner.next();
                     List<Oven> ovenList = ovenService.getOvensByPowerConsumption(searchOvenByPowerConsumption);
                     if (ovenList.isEmpty()) {
-                        System.out.println(Colors.RED + "No results found for power consumption '" + searchOvenByPowerConsumption + "'." + Colors.RESET);
+                        System.out.println(Colors.RED + "No results found for power consumption '"
+                                + searchOvenByPowerConsumption + "'." + Colors.RESET);
                         System.out.println("Try searching with different values.");
                     } else {
                         ovenList.forEach(oven -> System.out.println(Colors.CYAN + oven + Colors.RESET));
@@ -56,7 +57,8 @@ public class OvenController {
                     String searchOvenByCapacity = scanner.next();
                     List<Oven> ovenList = ovenService.getOvensByCapacity(searchOvenByCapacity);
                     if (ovenList.isEmpty()) {
-                        System.out.println(Colors.RED + "No results found for capacity '" + searchOvenByCapacity + "'." + Colors.RESET);
+                        System.out.println(Colors.RED + "No results found for capacity '" + searchOvenByCapacity + "'."
+                                + Colors.RESET);
                         System.out.println("Try searching with different values.");
                     } else {
                         ovenList.forEach(oven -> System.out.println(Colors.CYAN + oven + Colors.RESET));
@@ -115,8 +117,10 @@ public class OvenController {
         String depth = scanner.next();
         System.out.print("Enter the price of the oven: ");
         String price = scanner.next();
-        
-        Oven oven = new Oven(0, Integer.parseInt(powerConsumption), Integer.parseInt(capacity), Integer.parseInt(weight), Double.parseDouble(width), Double.parseDouble(height), Integer.parseInt(depth), Integer.parseInt(price));
+
+        Oven oven = new Oven(0, Integer.parseInt(powerConsumption), Integer.parseInt(capacity),
+                Integer.parseInt(weight), Double.parseDouble(width), Double.parseDouble(height),
+                Integer.parseInt(depth), Integer.parseInt(price));
         try {
             ovenService.addOven(oven);
             System.out.println(Colors.GREEN + "Oven added successfully!" + Colors.RESET);

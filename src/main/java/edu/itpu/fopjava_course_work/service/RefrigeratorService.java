@@ -8,12 +8,14 @@ import edu.itpu.fopjava_course_work.entity.Refrigerator;
 public interface RefrigeratorService {
     List<Refrigerator> getRefrigeratorsBySearch(String searchRefrigerator) throws IOException;
 
-    List<Refrigerator> getRefrigeratorsByPowerConsumption(String searchRefrigeratorByPowerConsumption) throws IOException;
+    List<Refrigerator> getRefrigeratorsByPowerConsumption(String searchRefrigeratorByPowerConsumption)
+            throws IOException;
 
     List<Refrigerator> getRefrigeratorsByOverallCapacity(String searchRefrigeratorByOverallCapacity) throws IOException;
 
     List<Refrigerator> getAll() throws IOException;
 
     void addRefrigerator(Refrigerator refrigerator) throws IOException;
+
     boolean removeRefrigerator(int id) throws IOException;
 }

@@ -10,7 +10,8 @@ public final class DAOFactory {
     private final OvenDAO ovenDAO = new OvenDAOImpl();
     private final RefrigeratorDAO refrigeratorDAO = new RefrigeratorDAOImpl();
 
-    private DAOFactory() {}
+    private DAOFactory() {
+    }
 
     public static DAOFactory getInstance() {
         return instance;

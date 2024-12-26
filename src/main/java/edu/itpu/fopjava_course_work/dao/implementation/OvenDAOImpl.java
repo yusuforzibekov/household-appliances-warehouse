@@ -32,14 +32,14 @@ public class OvenDAOImpl implements OvenDAO {
             try {
                 // Parse the data from each row and create an `Oven` object
                 Oven oven = new Oven(
-                    Integer.parseInt(ovenData[0]), // ID
-                    Integer.parseInt(ovenData[1]), // Power consumption
-                    Integer.parseInt(ovenData[2]), // Capacity
-                    Integer.parseInt(ovenData[3]), // Weight
-                    Double.parseDouble(ovenData[4]), // Width
-                    Double.parseDouble(ovenData[5]), // Height
-                    Integer.parseInt(ovenData[6]), // Depth
-                    Integer.parseInt(ovenData[7]) // Price
+                        Integer.parseInt(ovenData[0]), // ID
+                        Integer.parseInt(ovenData[1]), // Power consumption
+                        Integer.parseInt(ovenData[2]), // Capacity
+                        Integer.parseInt(ovenData[3]), // Weight
+                        Double.parseDouble(ovenData[4]), // Width
+                        Double.parseDouble(ovenData[5]), // Height
+                        Integer.parseInt(ovenData[6]), // Depth
+                        Integer.parseInt(ovenData[7]) // Price
                 );
 
                 // Add the `Oven` object to the list
@@ -58,14 +58,14 @@ public class OvenDAOImpl implements OvenDAO {
         List<String[]> rows = readMethod();
         int newId = rows.size();
         String[] ovenData = new String[] {
-            String.valueOf(newId),
-            String.valueOf(oven.getPowerConsumption()),
-            String.valueOf(oven.getCapacity()),
-            String.valueOf(oven.getWeight()),
-            String.valueOf(oven.getWidth()),
-            String.valueOf(oven.getHeight()),
-            String.valueOf(oven.getDepth()),
-            String.valueOf(oven.getPrice())
+                String.valueOf(newId),
+                String.valueOf(oven.getPowerConsumption()),
+                String.valueOf(oven.getCapacity()),
+                String.valueOf(oven.getWeight()),
+                String.valueOf(oven.getWidth()),
+                String.valueOf(oven.getHeight()),
+                String.valueOf(oven.getDepth()),
+                String.valueOf(oven.getPrice())
         };
         rows.add(ovenData);
         CSVUtils.writeCSV(CSV_FILE_PATH, rows);

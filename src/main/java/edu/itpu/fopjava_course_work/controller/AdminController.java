@@ -15,9 +15,11 @@ public class AdminController {
     private final RefrigeratorController refrigeratorController;
     private final Scanner scanner;
 
-    public AdminController(LaptopController laptopController, OvenController ovenController, RefrigeratorController refrigeratorController) {
+    public AdminController(LaptopController laptopController, OvenController ovenController,
+            RefrigeratorController refrigeratorController) {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        this.adminService = new AdminService(serviceFactory.getLaptopService(), serviceFactory.getRefrigeratorService(), serviceFactory.getOvenService());
+        this.adminService = new AdminService(serviceFactory.getLaptopService(), serviceFactory.getRefrigeratorService(),
+                serviceFactory.getOvenService());
         this.laptopController = laptopController;
         this.ovenController = ovenController;
         this.refrigeratorController = refrigeratorController;

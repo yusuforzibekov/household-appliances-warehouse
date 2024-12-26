@@ -31,15 +31,15 @@ public class RefrigeratorDAOImpl implements RefrigeratorDAO {
             try {
                 // Parse the data from each row and create a Refrigerator object
                 Refrigerator refrigerator = new Refrigerator(
-                    Integer.parseInt(refrigeratorData[0]), // id
-                    Integer.parseInt(refrigeratorData[1]), // powerConsumption
-                    Integer.parseInt(refrigeratorData[2]), // freezerCapacity
-                    Integer.parseInt(refrigeratorData[3]), // overallCapacity
-                    Integer.parseInt(refrigeratorData[4]), // weight
-                    Double.parseDouble(refrigeratorData[5]), // width
-                    Double.parseDouble(refrigeratorData[6]), // height
-                    Integer.parseInt(refrigeratorData[7]), // depth
-                    Integer.parseInt(refrigeratorData[8]) // price
+                        Integer.parseInt(refrigeratorData[0]), // id
+                        Integer.parseInt(refrigeratorData[1]), // powerConsumption
+                        Integer.parseInt(refrigeratorData[2]), // freezerCapacity
+                        Integer.parseInt(refrigeratorData[3]), // overallCapacity
+                        Integer.parseInt(refrigeratorData[4]), // weight
+                        Double.parseDouble(refrigeratorData[5]), // width
+                        Double.parseDouble(refrigeratorData[6]), // height
+                        Integer.parseInt(refrigeratorData[7]), // depth
+                        Integer.parseInt(refrigeratorData[8]) // price
                 );
 
                 // Add the Refrigerator object to the list
@@ -57,15 +57,15 @@ public class RefrigeratorDAOImpl implements RefrigeratorDAO {
         List<String[]> rows = readMethod();
         int newId = rows.size();
         String[] refrigeratorData = new String[] {
-            String.valueOf(newId),
-            String.valueOf(refrigerator.getPowerConsumption()),
-            String.valueOf(refrigerator.getFreezerCapacity()),
-            String.valueOf(refrigerator.getOverallCapacity()),
-            String.valueOf(refrigerator.getWeight()),
-            String.valueOf(refrigerator.getWidth()),
-            String.valueOf(refrigerator.getHeight()),
-            String.valueOf(refrigerator.getDepth()),
-            String.valueOf(refrigerator.getPrice())
+                String.valueOf(newId),
+                String.valueOf(refrigerator.getPowerConsumption()),
+                String.valueOf(refrigerator.getFreezerCapacity()),
+                String.valueOf(refrigerator.getOverallCapacity()),
+                String.valueOf(refrigerator.getWeight()),
+                String.valueOf(refrigerator.getWidth()),
+                String.valueOf(refrigerator.getHeight()),
+                String.valueOf(refrigerator.getDepth()),
+                String.valueOf(refrigerator.getPrice())
         };
         rows.add(refrigeratorData);
         CSVUtils.writeCSV(CSV_FILE_PATH, rows);

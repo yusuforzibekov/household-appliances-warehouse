@@ -46,7 +46,8 @@ public class LaptopController {
                     String searchLaptopByOS = scanner.next();
                     List<Laptop> laptopList = laptopService.getLaptopsByOS(searchLaptopByOS);
                     if (laptopList.isEmpty()) {
-                        System.out.println(Colors.RED + "No results found for OS '" + searchLaptopByOS + "'." + Colors.RESET);
+                        System.out.println(
+                                Colors.RED + "No results found for OS '" + searchLaptopByOS + "'." + Colors.RESET);
                         System.out.println("Try searching with the terms such as 'Windows' or 'Linux'.");
                     } else {
                         System.out.println(Colors.GREEN + "Search results:" + Colors.RESET);
@@ -58,7 +59,8 @@ public class LaptopController {
                     String searchLaptopByCPU = scanner.next();
                     List<Laptop> laptopList = laptopService.getLaptopsByCPU(searchLaptopByCPU);
                     if (laptopList.isEmpty()) {
-                        System.out.println(Colors.RED + "No results found for CPU '" + searchLaptopByCPU + "'." + Colors.RESET);
+                        System.out.println(
+                                Colors.RED + "No results found for CPU '" + searchLaptopByCPU + "'." + Colors.RESET);
                         System.out.println("Try searching with different CPUs like 1.2, 2.2, or 3.2.");
                     } else {
                         System.out.println(Colors.GREEN + "Search results:" + Colors.RESET);
@@ -126,8 +128,11 @@ public class LaptopController {
         String depth = scanner.next();
         System.out.print("Enter the price of the laptop: ");
         String price = scanner.next();
-        
-        Laptop laptop = new Laptop(0, Double.parseDouble(batteryCapacity), os, Integer.parseInt(memoryRom), Integer.parseInt(systemMemory), Double.parseDouble(cpu), Integer.parseInt(displayInches), Integer.parseInt(weight), Double.parseDouble(width), Double.parseDouble(height), Integer.parseInt(depth), Integer.parseInt(price));
+
+        Laptop laptop = new Laptop(0, Double.parseDouble(batteryCapacity), os, Integer.parseInt(memoryRom),
+                Integer.parseInt(systemMemory), Double.parseDouble(cpu), Integer.parseInt(displayInches),
+                Integer.parseInt(weight), Double.parseDouble(width), Double.parseDouble(height),
+                Integer.parseInt(depth), Integer.parseInt(price));
         try {
             laptopService.addLaptop(laptop);
             System.out.println(Colors.GREEN + "Laptop added successfully!" + Colors.RESET);

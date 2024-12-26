@@ -78,6 +78,7 @@ public class Refrigerator extends Appliance implements PowerConsumable {
         return Colors.BOLD + Colors.RESET + "Refrigerator [" + Colors.RESET + Colors.ID + "id=" + id + ", "
                 + Colors.RESET + Colors.POWER_CONSUMPTION + "powerConsumption=" + powerConsumption + ", " + Colors.RESET
                 + Colors.FREEZER_CAPACITY + "freezerCapacity=" + freezerCapacity + ", " + Colors.RESET
-                + Colors.OVERALL_CAPACITY + "overallCapacity=" + overallCapacity + ", " + Colors.RESET + super.toString();
+                + Colors.OVERALL_CAPACITY + "overallCapacity=" + overallCapacity + ", " + Colors.RESET
+                + super.toString();
     }
 }
